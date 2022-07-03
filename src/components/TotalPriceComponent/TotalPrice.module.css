@@ -1,0 +1,16 @@
+.Price {
+    padding-top: 5rem;
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    background-color: #7cccfc;
+}
+
+.Price h1 {
+    font-size: 3.3rem;
+}
+
+
+.Price .Result {
+    font-size: 5rem;
+}
