@@ -6,11 +6,18 @@ const TotalPrice = (props) => {
 
     useEffect(() => {
         console.log(resultValue)
-    })
+    }, [resultValue])
+
     return (
         <div className={styles.Price}>
             <h1>Total price:</h1>
-            {resultValue && <div className={styles.Result}>{resultValue.reduce((accumulator, object) => accumulator + object.price, 0)} $</div>}
+            {
+                resultValue &&
+                <div className={styles.Result}>
+                    {
+                        resultValue.products.reduce((accumulator, object) => accumulator + object.price, 0)} $
+                </div>
+            }
 
         </div>
     )

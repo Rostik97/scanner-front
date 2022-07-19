@@ -3,7 +3,8 @@
     flex: 2;
     display: flex;
     flex-direction: column;
-    background-color: #7cccfc;
+    border-left: lightgray 0.7px solid;
+    background-color: rgba(191, 228, 249, 0.22);
 }
 
 .Price h1 {
