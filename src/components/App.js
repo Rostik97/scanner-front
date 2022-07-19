@@ -1,7 +1,7 @@
 import './App.css';
-import Scan from "./ScanComponent/ScanComponent";
 import TotalPrice from "./TotalPriceComponent/TotalPrice";
 import React, {useState} from "react";
+import ScanComponent from "./ScanComponent/ScanComponent";
 
 function App() {
 
@@ -10,11 +10,8 @@ function App() {
 
     return (
         <div className="App">
-            <header className="App-header">
-                <h1>SMART SCANNER</h1>
-            </header>
             <div className="Content">
-                <Scan setResultValue={setResultValue}/>
+                <ScanComponent setResultValue={setResultValue}/>
                 <TotalPrice resultValue={resultValue}/>
             </div>
         </div>
