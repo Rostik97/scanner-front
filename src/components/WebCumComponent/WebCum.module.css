@@ -1,0 +1,15 @@
+.CameraContent {
+    margin: 0;
+    padding: 20px;
+}
+
+.Photos {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.Photo {
+    width: 200px;
+    height: 110px;
+}
