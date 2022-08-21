@@ -1,0 +1,14 @@
+.Preview {
+    width: 750px;
+    height: 350px;
+}
+
+.FooterPreview {
+    border-top: lightgray 0.6px solid;
+    padding: 15px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
