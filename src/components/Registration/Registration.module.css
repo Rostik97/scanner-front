@@ -1,0 +1,135 @@
+.RegistrationPage {
+    box-sizing: border-box;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(100, 149, 237, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.SuccessWindow {
+    width: 480px;
+    padding: 20px 20px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    border-radius: 15px;
+    box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+}
+
+.Form {
+    width: 400px;
+    padding: 25px 30px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+
+}
+
+.FormTitle {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 450;
+}
+
+.Row {
+    margin: 13px 0 5px 0;
+}
+
+
+.Error {
+    color: red;
+    font-size: 0.8rem;
+}
+
+.ErrorResponse {
+    color: red;
+    font-size: 0.9rem;
+    margin: 15px 0;
+}
+
+.TextField {
+    font-size: 1.1rem;
+    font-weight: 430;
+}
+
+a {
+    text-decoration: none;
+}
+
+.AuthLink {
+    margin: 15px 0;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.SuccessText {
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+
+.SuccessAnimation {
+    margin: 15px auto;
+    padding-left: 7px;
+}
+
+.Checkmark {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: block;
+    stroke-width: 2;
+    stroke: #4bb71b;
+    stroke-miterlimit: 10;
+    box-shadow: inset 0px 0px 0px #4bb71b;
+    animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+    position: relative;
+    top: 5px;
+    right: 5px;
+    margin: 0 auto;
+}
+
+.CheckmarkCircle {
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-width: 2;
+    stroke-miterlimit: 10;
+    stroke: #4bb71b;
+    fill: #fff;
+    animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+
+}
+
+.CheckmarkCheck {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+@keyframes stroke {
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes scale {
+    0%, 100% {
+        transform: none;
+    }
+
+    50% {
+        transform: scale3d(1.1, 1.1, 1);
+    }
+}
+
+@keyframes fill {
+    100% {
+        box-shadow: inset 0px 0px 0px 30px #4bb71b;
+    }
+}
