@@ -4,13 +4,19 @@ import axios from "axios";
 import Webcam from "react-webcam";
 import {UPLOAD_URL} from "../../backPathes";
 import {videoConstraints} from "../../cameraResolution";
+import {Spinner} from "react-bootstrap";
+import {useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {removeUser} from "../../store/userSlice";
 
 const ScanComponent = (props) => {
-
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const [isLoading, setLoading] = useState(false);
     const [scannedObject, setScannedObject] = useState(null);
     const webcamRef = useRef();
     const [image, setImage] = useState(null);
-    const {setResultValue} = props;
+    const {setResultValue, token} = props;
 
     useEffect(() => {
         console.log(scannedObject)
@@ -31,6 +37,7 @@ const ScanComponent = (props) => {
 
 
     const sendData = () => {
+        setLoading(true);
         const formData = new FormData();
         const blob = dataURItoBlob(image);
         // Update the formData object
@@ -38,13 +45,22 @@ const ScanComponent = (props) => {
         // Details of the uploaded file
         axios.post(UPLOAD_URL, formData, {
             headers: {
-                'Content-Type': "multipart/form-data"
+                'Content-Type': "multipart/form-data",
+                'Authorization': `Bearer ${token}`
             }
         }).then(response => {
             const resultProducts = response.data;
-            setScannedObject(resultProducts)
-            setResultValue(resultProducts)
-        }).catch(e => console.log(e));
+            setScannedObject(resultProducts);
+            setResultValue(resultProducts);
+            setLoading(false)
+        }).catch(e => {
+            console.log(e)
+            if (e.response.status === 401) {
+                dispatch(removeUser());
+                navigate("/login");
+            }
+            setLoading(false);
+        });
     }
 
     const dataURItoBlob = (dataURI) => {
@@ -60,7 +76,7 @@ const ScanComponent = (props) => {
         <div className={styles.ProductList}>
             <div className={styles.ResultWindow}>
                 {
-                    scannedObject && <div>
+                    (scannedObject && !isLoading) && <div>
                         {
                             scannedObject.products &&
                             scannedObject.products.length > 0 ?
@@ -81,13 +97,18 @@ const ScanComponent = (props) => {
                     </div>
                 }
                 {
-                    !scannedObject && (image ? <img src={image} alt="screenshot"/>
-                        : <Webcam screenshotFormat="image/jpeg"
-                                  ref={webcamRef}
-                                  videoConstraints={videoConstraints}
-                                  width={480}
-                                  height={480}
-                                  audio={false}/>)
+                    (!scannedObject && !isLoading) && (
+                        image ? <img src={image} alt="screenshot"/>
+                            : <Webcam screenshotFormat="image/jpeg"
+                                      ref={webcamRef}
+                                      videoConstraints={videoConstraints}
+                                      width={550}
+                                      height={550}
+                                      audio={false}/>
+                    )
+                }
+                {
+                    isLoading && <Spinner animation="border" variant="primary"/>
                 }
             </div>
             {
