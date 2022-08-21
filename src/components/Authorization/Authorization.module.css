@@ -1,0 +1,58 @@
+.AuthPage {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(100, 149, 237, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.Form {
+    width: 400px;
+    padding: 25px 30px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+
+}
+
+.FormTitle {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 450;
+}
+
+.Row {
+    margin: 20px 0 5px 0;
+}
+
+
+.Error {
+    color: red;
+    font-size: 0.8rem;
+}
+
+.ErrorResponse {
+    color: red;
+    font-size: 0.9rem;
+    margin: 15px 0;
+}
+
+.TextField {
+    font-size: 1.1rem;
+    font-weight: 430;
+}
+
+a {
+    text-decoration: none;
+}
+
+.RegistrationLink{
+    margin: 15px 0;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
