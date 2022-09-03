@@ -1,0 +1,46 @@
+.Products {
+    width: 100%;
+    height: 100%;
+    padding: 2rem 3rem;
+}
+
+.ProductsTable {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+th {
+    text-align: left;
+    padding: 1.3rem 0;
+    border-top: none;
+    border-bottom: 0.1rem solid #ebebeb;
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    color: #999;
+}
+
+td {
+    text-align: left;
+    padding: 1.2rem 0;
+    font-weight: 200;
+    font-size: 1.5rem;
+    border-bottom: 0.1rem solid #ebebeb;
+}
+
+.ProductName {
+    width: 40%;
+}
+
+.ProductName::first-letter {
+    text-transform: capitalize;
+}
+
+.ProductPrice {
+    width: 30%;
+}
+
+.ProductCount {
+    width: 30%;
+
+}
