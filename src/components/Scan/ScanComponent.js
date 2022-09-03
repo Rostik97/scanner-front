@@ -8,6 +8,7 @@ import {Spinner} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {removeUser} from "../../store/userSlice";
+import ProductsList from "./ProductsList";
 
 const ScanComponent = (props) => {
     const navigate = useNavigate();
@@ -34,6 +35,34 @@ const ScanComponent = (props) => {
         setResultValue(null)
         setScannedObject(null)
     }
+
+    const mockedArray = [
+        {
+            "id": 4,
+            "name": "пiсюн",
+            "price": 2
+        },
+        {
+            "id": 4,
+            "name": "пiсюн",
+            "price": 2
+        },
+        {
+            "id": 4,
+            "name": "пiсюн",
+            "price": 2
+        },
+        {
+            "id": 4,
+            "name": "пiсюн",
+            "price": 2
+        },
+        {
+            "id": 4,
+            "name": "пiсюн",
+            "price": 2
+        }
+    ]
 
 
     const sendData = () => {
@@ -73,28 +102,17 @@ const ScanComponent = (props) => {
     }
 
     return (
-        <div className={styles.ProductList}>
+        <div className={styles.Products}>
             <div className={styles.ResultWindow}>
                 {
-                    (scannedObject && !isLoading) && <div>
-                        {
-                            scannedObject.products &&
-                            scannedObject.products.length > 0 ?
-                                (
-                                    <h2>Scanned list</h2> && scannedObject.products.map((product, index) => {
-                                        return (
-                                            <div key={index}>
-                                                <p>Name: {product.name}</p>
-                                                <p>Price: {product.price}</p>
-                                            </div>
-                                        )
-                                    })
-                                )
-                                : <div>
-                                    No matches found =(
-                                </div>
-                        }
-                    </div>
+                    !isLoading && scannedObject && (scannedObject.products && scannedObject.products.length > 0
+                        ?
+                        <ProductsList products={scannedObject.products}/>
+                        :
+                        <div>
+                            No matches found =(
+                        </div>
+                    )
                 }
                 {
                     (!scannedObject && !isLoading) && (
@@ -108,7 +126,7 @@ const ScanComponent = (props) => {
                     )
                 }
                 {
-                    isLoading && <Spinner animation="border" variant="primary"/>
+                    isLoading && <Spinner animation="border" size="bg" variant="primary"/>
                 }
             </div>
             {
