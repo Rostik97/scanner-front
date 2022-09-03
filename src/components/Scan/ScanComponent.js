@@ -61,6 +61,21 @@ const ScanComponent = (props) => {
             "id": 4,
             "name": "пiсюн",
             "price": 2
+        },
+        {
+            "id": 4,
+            "name": "пiсюн",
+            "price": 2
+        },
+        {
+            "id": 4,
+            "name": "пiсюн",
+            "price": 2
+        },
+        {
+            "id": 4,
+            "name": "пiсюн",
+            "price": 2
         }
     ]
 
