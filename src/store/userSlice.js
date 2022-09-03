@@ -16,6 +16,7 @@ const userSlice = createSlice({
             console.log("REDUX")
             console.log(action)
             state.token = action.payload.token;
+            localStorage.setItem('token', action.payload.token)
         },
         removeUser(state) {
             state.email = null;

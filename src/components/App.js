@@ -10,7 +10,7 @@ function App() {
 
     const {isAuth} = useAuth();
 
-    if (!isAuth) {
+    if (!isAuth()) {
         return (
             <Routes>
                 <Route path="/login" element={<Authorization/>}/>

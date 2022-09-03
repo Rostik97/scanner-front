@@ -16,7 +16,7 @@ const Authorization = () => {
     const [loginError, setLoginError] = useState(null)
     const [passwordError, setPasswordError] = useState(null)
     const [errorResponse, setErrorResponse] = useState(null);
-    
+
 
     const handleSubmit = event => {
         if (event) event.preventDefault();

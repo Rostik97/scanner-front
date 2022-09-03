@@ -13,7 +13,7 @@ const WebCum = () => {
     const navigate = useNavigate();
     const closePreview = () => setShowPreview(false);
 
-    if (!isAuth) {
+    if (!isAuth()) {
         navigate("/login")
     }
 
