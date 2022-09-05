@@ -1,8 +1,8 @@
 .Products {
-    width: 100%;
+    width: 97%;
     height: 100%;
     padding: 1.7rem 3.2rem;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
 .ProductsTable {
@@ -25,6 +25,7 @@ td {
     padding: 1.2rem 0;
     font-weight: 200;
     font-size: 1.5rem;
+    color: black;
     border-bottom: 0.1rem solid #ebebeb;
 }
 
@@ -37,10 +38,10 @@ td {
 }
 
 .ProductPrice {
-    width: 30%;
+    width: 35%;
 }
 
 .ProductCount {
-    width: 30%;
+    width: 25%;
 
 }

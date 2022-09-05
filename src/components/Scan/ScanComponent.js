@@ -36,48 +36,7 @@ const ScanComponent = (props) => {
         setScannedObject(null)
     }
 
-    const mockedArray = [
-        {
-            "id": 4,
-            "name": "пiсюн",
-            "price": 2
-        },
-        {
-            "id": 4,
-            "name": "пiсюн",
-            "price": 2
-        },
-        {
-            "id": 4,
-            "name": "пiсюн",
-            "price": 2
-        },
-        {
-            "id": 4,
-            "name": "пiсюн",
-            "price": 2
-        },
-        {
-            "id": 4,
-            "name": "пiсюн",
-            "price": 2
-        },
-        {
-            "id": 4,
-            "name": "пiсюн",
-            "price": 2
-        },
-        {
-            "id": 4,
-            "name": "пiсюн",
-            "price": 2
-        },
-        {
-            "id": 4,
-            "name": "пiсюн",
-            "price": 2
-        }
-    ]
+
 
 
     const sendData = () => {
@@ -133,6 +92,7 @@ const ScanComponent = (props) => {
                     (!scannedObject && !isLoading) && (
                         image ? <img src={image} alt="screenshot"/>
                             : <Webcam screenshotFormat="image/jpeg"
+                                      mirrored="false"
                                       ref={webcamRef}
                                       videoConstraints={videoConstraints}
                                       width={550}
@@ -168,3 +128,47 @@ const ScanComponent = (props) => {
 
 
 export default ScanComponent
+
+
+// const mockedArray = [
+//     {
+//         "id": 4,
+//         "name": "пiсюн",
+//         "price": 2
+//     },
+//     {
+//         "id": 4,
+//         "name": "пiсюн",
+//         "price": 2
+//     },
+//     {
+//         "id": 4,
+//         "name": "пiсюн",
+//         "price": 2
+//     },
+//     {
+//         "id": 4,
+//         "name": "пiсюн",
+//         "price": 2
+//     },
+//     {
+//         "id": 4,
+//         "name": "пiсюн",
+//         "price": 2
+//     },
+//     {
+//         "id": 4,
+//         "name": "пiсюн",
+//         "price": 2
+//     },
+//     {
+//         "id": 4,
+//         "name": "пiсюн",
+//         "price": 2
+//     },
+//     {
+//         "id": 4,
+//         "name": "пiсюн",
+//         "price": 2
+//     }
+// ]
