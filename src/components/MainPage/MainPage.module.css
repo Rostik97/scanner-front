@@ -1,0 +1,75 @@
+.Main {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 60px;
+}
+.Main .Actions a {
+    text-decoration: none;
+    color: inherit;
+    font-size: inherit;
+}
+
+.Img {
+    width: 900px;
+    height: 200px;
+}
+
+.Actions {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.Button {
+    border-radius: 5px;
+    margin: 40px;
+    line-height: 60px;
+    height: 60px;
+    text-align: center;
+    width: 250px;
+    cursor: pointer;
+    color: rgb(51, 73, 94);
+    font-size: 1.5rem;
+    transition: all 0.5s;
+    position: relative;
+}
+
+.Button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(51, 73, 94, 0.05);
+    transition: all 0.3s;
+}
+
+.Button:hover::before {
+    opacity: 0;
+    transform: scale(0.5, 0.5);
+}
+
+.Button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    transition: all 0.3s;
+    /*border: 1px solid rgba(255, 255, 255, 0.5);*/
+    border: 1px solid rgb(51, 73, 94);;
+    transform: scale(1.2, 1.2);
+}
+
+.Button:hover::after {
+    opacity: 1;
+    transform: scale(1, 1);
+}
