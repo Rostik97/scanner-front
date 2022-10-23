@@ -1,5 +1,5 @@
 import styles from './Authorization.module.css'
-import {useState} from "react";
+import React, {useState} from "react";
 import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
 import {Button, Spinner} from "react-bootstrap";
@@ -37,18 +37,18 @@ const Authorization = () => {
     const sendAuthRequest = (login, password) => {
         setLoading(true);
         let bodyFormData = new FormData();
-        bodyFormData.append("username", login)
-        bodyFormData.append("password", password)
+        bodyFormData.append("username", login);
+        bodyFormData.append("password", password);
         axios.post(AUTH_URL, bodyFormData,
             {
                 headers: {"Content-Type": "multipart/form-data"}
             })
             .then(response => {
-                console.log(response)
+                console.log(response);
                 const token = response.data.access;
-                dispatch(setUser({token}))
+                dispatch(setUser({token, username: login}));
                 setLoading(false);
-                navigate("/")
+                navigate("/");
             })
             .catch(err => {
                 if (err.response.status === 401) {
