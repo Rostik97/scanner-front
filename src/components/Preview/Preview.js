@@ -1,8 +1,9 @@
 import {Button, Modal} from "react-bootstrap";
 import styles from "./Preview.module.css"
 import previewLogo from './ezgif-1-b092c8892b.gif'
+import React from "react";
 
-const Preview = ({show, handleClose}) => {
+const Preview = ({handleClose}) => {
 
     const Footer = () => {
       return(
@@ -17,24 +18,17 @@ const Preview = ({show, handleClose}) => {
     }
 
     return (
-        <Modal show={show}
+        <Modal show={true}
                onHide={handleClose}
                animation={true}
                size="lg"
                aria-labelledby="contained-modal-title-vcenter"
                centered>
-            {/*<Modal.Header closeButton>*/}
-            {/*    <Modal.Title>Modal heading</Modal.Title>*/}
-            {/*</Modal.Header>*/}
+
             <Modal.Body>
                 <img className={styles.Preview} src={previewLogo} alt="Preview"/>
             </Modal.Body>
             <Modal.Footer as={Footer}>
-                {/*<div className={styles.FooterPreview}>*/}
-                {/*    <Button variant="secondary" onClick={handleClose}>*/}
-                {/*        CLOSE*/}
-                {/*    </Button>*/}
-                {/*</div>*/}
             </Modal.Footer>
         </Modal>
     )
