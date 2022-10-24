@@ -2,7 +2,8 @@
     width: 97%;
     height: 100%;
     padding: 1.7rem 3.2rem;
-    overflow-y: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .ProductsTable {
