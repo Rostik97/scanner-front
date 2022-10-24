@@ -3,7 +3,7 @@ import {createSlice} from "@reduxjs/toolkit";
 const initialState = {
     email: null,
     token: null,
-    name: null,
+    userName: null,
     id: null
 }
 
@@ -16,12 +16,14 @@ const userSlice = createSlice({
             console.log("REDUX")
             console.log(action)
             state.token = action.payload.token;
+            state.username = action.payload.username;
             localStorage.setItem('token', action.payload.token)
         },
         removeUser(state) {
             state.email = null;
             state.token = null;
             state.id = null;
+            state.userName = null;
         }
     }
 });
