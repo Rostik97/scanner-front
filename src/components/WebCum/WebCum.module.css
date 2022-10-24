@@ -1,5 +1,8 @@
+
+
 .Content {
-    min-height: 100vh;
+    /*background-color: rgba(57, 114, 255, 0.19);*/
+    min-height: 94vh;
     display: flex;
     flex-direction: row;
 }

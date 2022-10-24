@@ -17,13 +17,15 @@ const WebCum = () => {
         navigate("/login")
     }
 
-
     return (
         <div className={styles.Content}>
-            <Preview show={showPreview} handleClose={closePreview}/> :
+            {
+                showPreview && <Preview handleClose={closePreview}/>
+            }
             <ScanComponent setResultValue={setResultValue} token={token}/>
             <TotalPrice resultValue={resultValue}/>
         </div>
+
     )
 }
 
