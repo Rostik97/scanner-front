@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useRef, useState} from "react";
 import styles from "./ScanComponent.module.css"
 import axios from "axios";
 import Webcam from "react-webcam";
-import {UPLOAD_URL} from "../../backPathes";
+import {PRODUCTS_URL} from "../../backPathes";
 import {videoConstraints} from "../../cameraResolution";
 import {Spinner} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
@@ -10,14 +10,13 @@ import {useDispatch} from "react-redux";
 import {removeUser} from "../../store/userSlice";
 import ProductsList from "./ProductsList";
 
-const ScanComponent = (props) => {
+const ScanComponent = ({setResultValue, token}) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [isLoading, setLoading] = useState(false);
     const [scannedObject, setScannedObject] = useState(null);
     const webcamRef = useRef();
     const [image, setImage] = useState(null);
-    const {setResultValue, token} = props;
 
     useEffect(() => {
         console.log(scannedObject)
@@ -36,17 +35,14 @@ const ScanComponent = (props) => {
         setScannedObject(null)
     }
 
-
-
-
     const sendData = () => {
         setLoading(true);
         const formData = new FormData();
         const blob = dataURItoBlob(image);
         // Update the formData object
-        formData.append("image", blob, "test.jpg");
+        formData.append("image", blob, "product.jpg");
         // Details of the uploaded file
-        axios.post(UPLOAD_URL, formData, {
+        axios.post(PRODUCTS_URL, formData, {
             headers: {
                 'Content-Type': "multipart/form-data",
                 'Authorization': `Bearer ${token}`
@@ -80,12 +76,12 @@ const ScanComponent = (props) => {
             <div className={styles.ResultWindow}>
                 {
                     !isLoading && scannedObject && (scannedObject.products && scannedObject.products.length > 0
-                        ?
-                        <ProductsList products={scannedObject.products}/>
-                        :
-                        <div>
-                            No matches found =(
-                        </div>
+                            ?
+                            <ProductsList products={scannedObject.products}/>
+                            :
+                            <div>
+                                No matches found =(
+                            </div>
                     )
                 }
                 {
@@ -95,8 +91,8 @@ const ScanComponent = (props) => {
                                       mirrored="false"
                                       ref={webcamRef}
                                       videoConstraints={videoConstraints}
-                                      width={550}
-                                      height={550}
+                                      height={630}
+                                      width={950}
                                       audio={false}/>
                     )
                 }
@@ -121,7 +117,6 @@ const ScanComponent = (props) => {
                     </button>
                 </>
             }
-
         </div>
     )
 }
