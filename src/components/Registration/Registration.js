@@ -1,4 +1,5 @@
 import styles from "./Registration.module.css";
+import React from "react";
 import {Link, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import axios from "axios";
@@ -81,7 +82,7 @@ const Registration = () => {
                 console.log(response);
                 if (response.status === 201 && response.data?.username) {
                     console.log(response.data)
-                    const {email, username} = response.data;
+                    let {email, username} = response.data;
                     dispatch(setUser({email, username}));
                     setIsRegister(true);
                 }
