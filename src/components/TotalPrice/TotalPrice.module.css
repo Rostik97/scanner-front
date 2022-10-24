@@ -1,13 +1,17 @@
 .Price {
-    padding-top: 3rem;
-    flex: 2;
+    box-sizing: border-box;
+    text-align: center;
+    padding-top: 1.7rem;
+    flex: 1;
     display: flex;
     flex-direction: column;
-    border-left: lightgray 0.7px solid;
-    background-color: rgba(100, 149, 237, 0.05);
+    border: lightgray 0.5px solid;
+    margin: 0.7rem 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .25);
 }
 
-.Price h1 {
+.Price span {
     font-size: 3.3rem;
 }
 

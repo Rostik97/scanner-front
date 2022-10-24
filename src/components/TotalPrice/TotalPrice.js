@@ -10,7 +10,7 @@ const TotalPrice = (props) => {
 
     return (
         <div className={styles.Price}>
-            <h1>Total price:</h1>
+            <span>Total price:</span>
             {
                 resultValue &&
                 <div className={styles.Result}>
