@@ -1,7 +1,7 @@
 import styles from './Authorization.module.css'
 import React, {useState} from "react";
 import axios from "axios";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {Button, Spinner} from "react-bootstrap";
 import {useDispatch} from "react-redux";
 import {setUser} from "../../store/userSlice";
@@ -9,6 +9,7 @@ import {AUTH_URL} from "../../backPathes";
 
 const Authorization = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
     const [login, setLogin] = useState(null);
@@ -16,7 +17,7 @@ const Authorization = () => {
     const [loginError, setLoginError] = useState(null)
     const [passwordError, setPasswordError] = useState(null)
     const [errorResponse, setErrorResponse] = useState(null);
-
+    const fromPage = location.state?.from?.pathname || "/";
 
     const handleSubmit = event => {
         if (event) event.preventDefault();
@@ -48,7 +49,8 @@ const Authorization = () => {
                 const token = response.data.access;
                 dispatch(setUser({token, username: login}));
                 setLoading(false);
-                navigate("/");
+                console.log(location);
+                navigate(fromPage);
             })
             .catch(err => {
                 if (err.response.status === 401) {
@@ -113,7 +115,7 @@ const Authorization = () => {
                     }
                 </Button>
                 <div className={styles.RegistrationLink}>
-                    Not registered yet? <Link to={"/register"}>Sign Up</Link>
+                    Not registered yet? <Link to={"/register"} state={{from: fromPage}}>Sign Up</Link>
                 </div>
             </form>
         </div>
