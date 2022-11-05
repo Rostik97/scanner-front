@@ -4,6 +4,7 @@ import Logo from "./img.svg"
 import {Link} from "react-router-dom";
 
 const MainPage = () => {
+
     return (
         <div className={styles.Main}>
             <img className={styles.Img} src={Logo} alt="website logo"/>
