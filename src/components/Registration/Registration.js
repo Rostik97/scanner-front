@@ -1,6 +1,6 @@
 import styles from "./Registration.module.css";
-import React from "react";
-import {Link, useNavigate} from "react-router-dom";
+import React, {useEffect} from "react";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import axios from "axios";
 import {Button} from "react-bootstrap";
@@ -11,6 +11,7 @@ import {REGISTER_URL} from "../../backPathes";
 const Registration = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const location = useLocation();
     const [isLoading, setLoading] = useState(false);
     const [errorResponse, setErrorResponse] = useState(null);
     const [formData, setFormData] = useState({
@@ -26,6 +27,13 @@ const Registration = () => {
         repeatedPasswordError: "",
         emailError: ""
     });
+    const fromPage = location.state?.from || "/login";
+
+    useEffect(() => {
+        console.log(location);
+        console.log(isRegister);
+        console.log(fromPage)
+    }, [isRegister])
 
     const handleSubmit = (event) => {
         if (event) event.preventDefault();
@@ -81,10 +89,11 @@ const Registration = () => {
                 setLoading(false);
                 console.log(response);
                 if (response.status === 201 && response.data?.username) {
+                    setIsRegister(prevState => !prevState);
                     console.log(response.data)
                     let {email, username} = response.data;
                     dispatch(setUser({email, username}));
-                    setIsRegister(true);
+                    console.log(isRegister);
                 }
             })
             .catch(err => {
@@ -171,7 +180,7 @@ const Registration = () => {
             <span className={styles.SuccessText}>Registration completed successfully!!!</span>
             <Button type="submit"
                     variant="outline-success"
-                    onClick={() => navigate("/login")}>
+                    onClick={() => navigate("/login", {state: {from: fromPage}})}>
                 Continue
             </Button>
         </div>
