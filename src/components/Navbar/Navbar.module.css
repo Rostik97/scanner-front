@@ -1,39 +1,40 @@
 .Container {
     min-height: 6vh;
     display: flex;
+    gap: 20px;
     flex-direction: row;
     align-items: center;
     padding-left: 1rem;
-    padding-right: 4rem;
+    padding-right: 2rem;
     justify-content: space-between;
     border-bottom: lightgray 0.5px solid;
 }
 
-a {
+.Menu {
+    font-size: 1.5rem;
+    font-weight: 200;
+    display: flex;
+    align-items: center;
+    gap: 2.7rem;
+}
+
+.Menu a {
     color: black;
     text-decoration: none;
     margin: 0;
     padding: 0;
 }
 
-a:hover {
+.Menu a:hover {
     color: cornflowerblue;
 }
 
-
-.Menu {
-    font-size: 1.5rem;
-    font-weight: 200;
-    display: flex;
-    gap: 3rem;
-}
-
 .LogOutIcon {
-    width: 1.5rem;
-    display: flex;
-
+    width: 30px;
+    height: 27px;
+    cursor: pointer;
 }
 
-.LogOutIcon:hover {
-    color: #ff5b26;
+.LogOutIcon:hover * {
+    color: cornflowerblue;
 }
