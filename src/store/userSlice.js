@@ -13,7 +13,7 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         setUser(state, action) {
-            console.log("REDUX")
+            console.log("REDUX", action)
             console.log(action)
             state.token = action.payload.token;
             state.username = action.payload.username;
@@ -24,6 +24,7 @@ const userSlice = createSlice({
             state.token = null;
             state.id = null;
             state.userName = null;
+            localStorage.removeItem('token');
         }
     }
 });

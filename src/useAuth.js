@@ -8,7 +8,7 @@ export function useAuth() {
     const navigate = useNavigate();
 
     const isAuth = () => {
-        return token ? true : localStorage.getItem("token");
+        return localStorage.getItem("token");
     }
 
     const logOut = () => {
