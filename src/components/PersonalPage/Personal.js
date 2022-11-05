@@ -9,16 +9,27 @@ import {removeUser} from "../../store/userSlice";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {useAuth} from "../../useAuth";
+import {Spinner} from "react-bootstrap";
 
 const Personal = () => {
+    const controller = new AbortController();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const {userName, token} = useAuth();
     const [imgs, setImgs] = useState([]);
     const [loading, setLoading] = useState(false);
     const [countStyle, setCountStyle] = useState('More');
-    const [photosStyle, setPhotosStyle] = useState('ResultPhotos')
+    const [photosStyle, setPhotosStyle] = useState('ResultPhotos');
+    const [resultSendPhoto, setResultSendPhoto] = useState(null);
     const webcamRef = useRef();
+
+    useEffect(() => {
+        if (imgs.length === 10) {
+            setCountStyle("Success");
+            setPhotosStyle('ResultPhotosSuccess');
+        }
+    }, [imgs]);
+
     const handleCaptureScreenshot = () => {
         const imageSrc = webcamRef.current.getScreenshot();
         setImgs(prevState => {
@@ -32,46 +43,55 @@ const Personal = () => {
     };
 
     const resetPhotos = () => {
+        setResultSendPhoto(null);
         setImgs([]);
         setCountStyle("More");
         setPhotosStyle('ResultPhotos');
+        setLoading(false);
+        controller.abort();
     }
 
-    useEffect(() => {
-        if (imgs.length === 10) {
-            setCountStyle("Success");
-            setPhotosStyle('ResultPhotosSuccess');
-        }
-    }, [imgs]);
-
-    const sendPhotos = () => {
+    const sendPhotos = async () => {
         setLoading(true);
-        imgs.forEach(img => sendPhoto(img));
-    };
-
-    const sendPhoto = (image) => {
-        const formData = new FormData();
-        const blob = dataURItoBlob(image);
-        // Update the formData object
-        formData.append("image", blob, `${userName}.jpg`);
-        // Details of the uploaded file
-        axios.post(FACE_SCAN_URL, formData, {
+        const requests = (formData, token) => axios.post(FACE_SCAN_URL, formData, {
+            signal: controller.signal,
             headers: {
                 'Content-Type': "multipart/form-data",
                 'Authorization': `Bearer ${token}`
             }
-        }).then(response => {
-            const resultProducts = response.data;
-            console.log(resultProducts);
-            setLoading(false)
-        }).catch(e => {
-            console.log(e)
-            if (e.response.status === 401) {
-                dispatch(removeUser());
-                navigate("/login");
-            }
-            setLoading(false);
         });
+        const promises = imgs.map((img) => {
+            let formData = getFormData(img);
+            return requests(formData, token);
+        });
+        await Promise.all(promises)
+            .then(response => {
+                console.log(response);
+                if (response.length === 10 && response.every(response => response.status === 200)) {
+                    setResultSendPhoto(`Success!! 
+                    Wait for a while. 
+                    Stupid machine need time to process your photo...`);
+                } else {
+                    setResultSendPhoto("Something happened, not all photos has been sent =(");
+                }
+            }).catch(e => {
+                if (e.response.status === 401) {
+                    dispatch(removeUser());
+                    navigate("/login");
+                }
+            });
+        setLoading(false);
+    };
+
+    function getFormData(image) {
+        if (image === null || image === undefined) {
+            throw new Error("Empty image");
+        }
+        const formData = new FormData();
+        const blob = dataURItoBlob(image);
+        formData.append("image", blob, `${userName}.jpg`);
+        console.log("Form data object: ", formData);
+        return formData;
     }
 
     const dataURItoBlob = (dataURI) => {
@@ -92,13 +112,22 @@ const Personal = () => {
                     </div>
                     <div className={styles[countStyle]}>{imgs.length}/10</div>
                 </div>
-                <Webcam screenshotFormat="image/jpeg"
-                        mirrored="false"
-                        ref={webcamRef}
-                        videoConstraints={videoConstraints}
-                        height={480}
-                        width={850}
-                        audio={false}/>
+                {
+                    loading
+                        ?
+                        <div className={styles.Spinner}>
+                            <Spinner animation="border" size="bg" variant="primary"/>
+                        </div>
+                        : (resultSendPhoto ? <div className={styles.SuccessMsg}>{resultSendPhoto}</div>
+                            : <Webcam screenshotFormat="image/jpeg"
+                                      mirrored="false"
+                                      ref={webcamRef}
+                                      videoConstraints={videoConstraints}
+                                      height={480}
+                                      width={850}
+                                      audio={false}/>)
+
+                }
                 <button onClick={handleCaptureScreenshot} className={`btn btn-outline-primary ${styles.Button}`}>
                     MAKE PHOTO
                 </button>

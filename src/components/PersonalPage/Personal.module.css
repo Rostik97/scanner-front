@@ -20,6 +20,7 @@
     justify-content: space-around;
     flex-direction: row;
     font-size: 1.6rem;
+    margin: 3px 0;
     font-weight: 300;
 }
 
@@ -59,4 +60,23 @@
 
 .More {
     color: black;
+}
+
+.SuccessMsg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 480px;
+    width: 850px;
+    color: green;
+    font-size: 2.5rem;
+    font-weight: 200;
+}
+
+.Spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 480px;
+    width: 850px;
 }
