@@ -61,7 +61,6 @@ const Personal = () => {
     const trainModelRequest = () => axios.get(FACE_SCAN_TRAIN_MODEL_URL, {
         signal: controller.signal,
         headers: {
-            'Content-Type': "multipart/form-data",
             'Authorization': `Bearer ${token}`
         }
     });
