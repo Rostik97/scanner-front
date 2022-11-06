@@ -3,4 +3,6 @@
 export const PRODUCTS_URL = "https://api.smartscanapp.one/scan/";
 export const REGISTER_URL = "https://api.smartscanapp.one/register/";
 export const AUTH_URL = "https://api.smartscanapp.one/api/token/";
-export const FACE_SCAN_URL = "https://api.smartscanapp.one/facescan/";
+export const FACE_SCAN_URL = "https://api.smartscanapp.one/faceupload/";
+export const FACE_SCAN_TRAIN_MODEL_URL = "https://api.smartscanapp.one/faceupload/";
+// export const FACE_SCAN_URL = "https://api.smartscanapp.one/facescan/";

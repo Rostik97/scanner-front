@@ -4,7 +4,7 @@ import Webcam from "react-webcam";
 import styles from "./Personal.module.css";
 import ResultPersonalPhoto from "./ResultPersonalPhoto";
 import axios from "axios";
-import {FACE_SCAN_URL} from "../../backPathes";
+import {FACE_SCAN_TRAIN_MODEL_URL, FACE_SCAN_URL} from "../../backPathes";
 import {removeUser} from "../../store/userSlice";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
@@ -51,15 +51,22 @@ const Personal = () => {
         controller.abort();
     }
 
+    const requests = (formData, token) => axios.post(FACE_SCAN_URL, formData, {
+        signal: controller.signal,
+        headers: {
+            'Content-Type': "multipart/form-data",
+            'Authorization': `Bearer ${token}`
+        }
+    });
+    const trainModelRequest = () => axios.get(FACE_SCAN_TRAIN_MODEL_URL, {
+        signal: controller.signal,
+        headers: {
+            'Content-Type': "multipart/form-data",
+            'Authorization': `Bearer ${token}`
+        }
+    });
     const sendPhotos = async () => {
         setLoading(true);
-        const requests = (formData, token) => axios.post(FACE_SCAN_URL, formData, {
-            signal: controller.signal,
-            headers: {
-                'Content-Type': "multipart/form-data",
-                'Authorization': `Bearer ${token}`
-            }
-        });
         const promises = imgs.map((img) => {
             let formData = getFormData(img);
             return requests(formData, token);
@@ -68,9 +75,10 @@ const Personal = () => {
             .then(response => {
                 console.log(response);
                 if (response.length === 10 && response.every(response => response.status === 200)) {
-                    setResultSendPhoto(`Success!! 
-                    Wait for a while. 
-                    Stupid machine need time to process your photo...`);
+                    setResultSendPhoto(`Success!! Wait for a while. Stupid machine need time to process your photo...`);
+                    trainModelRequest()
+                        .then(response => console.log(response))
+                        .catch(e => console.log(e));
                 } else {
                     setResultSendPhoto("Something happened, not all photos has been sent =(");
                 }
@@ -89,6 +97,7 @@ const Personal = () => {
         }
         const formData = new FormData();
         const blob = dataURItoBlob(image);
+        console.log(userName);
         formData.append("image", blob, `${userName}.jpg`);
         console.log("Form data object: ", formData);
         return formData;
