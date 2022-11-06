@@ -7,25 +7,28 @@ import {useAuth} from "../../useAuth";
 
 const Navbar = () => {
 
-    const {logOut} = useAuth();
+    const {logOut, userName} = useAuth();
 
-    return (<div className={styles.Container}>
-        <Link to="/">
-            <img src={Logo} alt="Logo"/>
-        </Link>
-        <div className={styles.Menu}>
-            <NavLink to="/">
-                <div>HOME</div>
-            </NavLink>
-            <NavLink to="/personal">
-                <div>PERSONAL</div>
-            </NavLink>
-            <NavLink to="/products">
-                <div>PRODUCTS</div>
-            </NavLink>
-            <LogOutIcon onClick={logOut} className={styles.LogOutIcon}/>
+    return (
+        <div className={styles.Container}>
+            <Link to="/">
+                <img src={Logo} alt="Logo"/>
+            </Link>
+            <div className={styles.Menu}>
+                <NavLink to="/">
+                    <div>HOME</div>
+                </NavLink>
+                <NavLink to="/personal">
+                    <div>PERSONAL</div>
+                </NavLink>
+                <NavLink to="/products">
+                    <div>PRODUCTS</div>
+                </NavLink>
+                <div>{userName}</div>
+                <LogOutIcon onClick={logOut} className={styles.LogOutIcon}/>
+            </div>
         </div>
-    </div>)
+    )
 }
 
 export default Navbar;
